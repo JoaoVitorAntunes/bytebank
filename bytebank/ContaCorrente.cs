@@ -20,7 +20,7 @@ namespace bytebank
 
         public bool Sacar(double valor)
         {
-            if(valor <= saldo)
+            if (valor <= saldo)
             {
                 this.saldo -= valor;
                 return true;
@@ -29,7 +29,21 @@ namespace bytebank
             {
                 return false;
             }
-               
+        }
+
+        public bool Transferir(double valor, ContaCorrente destino)
+        {
+            if (this.saldo < valor)
+            {
+                return false;
+            }
+            else
+            {
+                this.Sacar(valor);
+                destino.Depositar(valor);
+                return true;   
+            }
+
         }
     }
 }
